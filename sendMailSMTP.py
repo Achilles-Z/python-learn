@@ -24,27 +24,28 @@ sender = 'xxx@xx.com'
 # 收件人列表
 receiverlist = ["x1@x1.com","x2@x2.com"]
 # 邮件标题
-subject = '%s %s' % ('python邮件发送脚本test',today)
+subject = '%s %s' % ('python邮件发送脚本test-by zeck',today)
 # SMTP邮件服务器地址
-smtpserver = 'smtp.exmail.qq.com'
+smtpserver = 'smtp.xx.xx.com'
 # 发件人的邮箱账号
 username = 'xxx@xx.com'
 # 发件人的邮箱密码 其实账号密码可以通过input形式
 password = 'xx'
 
-# 邮件正文内容
+# 邮件正文内容从文件中读取
 f = open('index.html',"r")
 content = f.read()
 #msg = MIMEText(content,'html','utf-8')
+# MIMEMultipart 这个类型是用于附件上传
 msg = MIMEMultipart()
 # 邮件正文设置utf-8 和 格式指定html
 msg.attach(MIMEText(content,'html','utf-8'))
 # from指定
 msg['From'] = 'xxx@xx.com'
-# 正文指定
+# 邮件标题指定
 msg['Subject'] = subject
 # 添加文件名称为index.html的文件作为附件
-att=MIMEText(open('index.html','rb').read(),'base64','gb2312')
+att=MIMEText(open('index.html','rb').read(),'base64','utf-8')
 att["Conten-Type"]='application/octet-stream'
 att["Content-Disposition"]='attachment;filename="index.html"'
 msg.attach(att)
